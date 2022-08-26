@@ -388,7 +388,7 @@ def conv2d(inputs,
   with tf.variable_scope(scope,reuse=reuse) as sc:
       if use_xavier:
           # initializer = tf.contrib.layers.xavier_initializer()
-          nitializer = tf.initializers.glorot_uniform()
+          initializer = tf.initializers.glorot_uniform()
       else:
           initializer = tf.truncated_normal_initializer(stddev=stddev)
 
