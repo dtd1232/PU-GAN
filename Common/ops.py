@@ -277,10 +277,12 @@ def instance_norm(net, train=True,weight_decay=0.00001):
 
     shift = tf.get_variable('shift',shape=var_shape,
                             initializer=tf.zeros_initializer,
-                            regularizer=tf.contrib.layers.l2_regularizer(weight_decay))
+                            # regularizer=tf.contrib.layers.l2_regularizer(weight_decay))
+                            regularizer = tf.keras.regularizers.L2(weight_decay))
     scale = tf.get_variable('scale', shape=var_shape,
                             initializer=tf.ones_initializer,
-                            regularizer=tf.contrib.layers.l2_regularizer(weight_decay))
+                            # regularizer=tf.contrib.layers.l2_regularizer(weight_decay))
+                            regularizer = tf.keras.regularizers.L2(weight_decay))
     epsilon = 1e-3
     normalized = (net - mu) / tf.square(sigma_sq + epsilon)
     return scale * normalized + shift
@@ -436,14 +438,17 @@ def fully_connected(inputs,
 
     with tf.variable_scope(scope) as sc:
         if use_xavier:
-            initializer = tf.contrib.layers.xavier_initializer()
+            # initializer = tf.contrib.layers.xavier_initializer()
+            initializer = tf.initializers.glorot_uniform()
         else:
             initializer = tf.truncated_normal_initializer(stddev=stddev)
 
         outputs = tf.layers.dense(inputs,num_outputs,
                                   use_bias=use_bias,kernel_initializer=initializer,
-                                  kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay),
-                                  bias_regularizer=tf.contrib.layers.l2_regularizer(weight_decay),
+                                  # kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay),
+                                  kernel_regularizer=tf.keras.regularizers.L2(weight_decay),
+                                  # bias_regularizer=tf.contrib.layers.l2_regularizer(weight_decay),
+                                  bias_regularizer=tf.keras.regularizers.L2(weight_decay),
                                   reuse=None)
 
         if bn:
