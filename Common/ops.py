@@ -295,16 +295,17 @@ def conv1d(inputs,
     """
     with tf.variable_scope(scope, reuse=reuse):
         if use_xavier:
-            initializer = tf.contrib.layers.xavier_initializer()
+            # initializer = tf.contrib.layers.xavier_initializer()
+            initializer = tf.initializers.glorot_uniform()
         else:
             initializer = tf.truncated_normal_initializer(stddev=stddev)
 
         outputs = tf.layers.conv1d(inputs, num_output_channels, kernel_size, stride, padding,
                                    kernel_initializer=initializer,
-                                   kernel_regularizer=tf.contrib.layers.l2_regularizer(
-                                       weight_decay),
-                                   bias_regularizer=tf.contrib.layers.l2_regularizer(
-                                       weight_decay),
+                                   # kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay),
+                                    kernel_regularizer=tf.keras.regularizers.L2(weight_decay),
+                                   # bias_regularizer=tf.contrib.layers.l2_regularizer(weight_decay),
+                                    bias_regularizer=tf.keras.regularizers.L2(weight_decay),
                                    use_bias=use_bias, reuse=None)
         assert not (bn and ibn)
         if bn:
@@ -357,14 +358,17 @@ def conv2d(inputs,
   """
   with tf.variable_scope(scope,reuse=reuse) as sc:
       if use_xavier:
-          initializer = tf.contrib.layers.xavier_initializer()
+          # initializer = tf.contrib.layers.xavier_initializer()
+          nitializer = tf.initializers.glorot_uniform()
       else:
           initializer = tf.truncated_normal_initializer(stddev=stddev)
 
       outputs = tf.layers.conv2d(inputs,num_output_channels,kernel_size,stride,padding,
                                  kernel_initializer=initializer,
-                                 kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay),
-                                 bias_regularizer=tf.contrib.layers.l2_regularizer(weight_decay),
+                                 # kernel_regularizer=tf.contrib.layers.l2_regularizer(weight_decay),
+                                 kernel_regularizer=tf.keras.regularizers.L2(weight_decay),
+                                 # bias_regularizer=tf.contrib.layers.l2_regularizer(weight_decay),
+                                 bias_regularizer=tf.keras.regularizers.L2(weight_decay),
                                  use_bias=use_bias,reuse=None)
       assert not (bn and ibn)
       if bn:
