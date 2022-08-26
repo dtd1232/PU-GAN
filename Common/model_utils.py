@@ -1,5 +1,6 @@
 import os
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 from tf_ops.approxmatch import tf_approxmatch
 from tf_ops.nn_distance import tf_nndistance
 from tf_ops.sampling import tf_sampling

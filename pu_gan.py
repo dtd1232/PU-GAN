@@ -1,4 +1,5 @@
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 from Upsampling.model import Model
 from Upsampling.configs import FLAGS
 from datetime import datetime

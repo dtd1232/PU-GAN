@@ -3,7 +3,8 @@
 # @Description :
 # @Author      : li rui hui
 # @Email       : ruihuili@gmail.com
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 from Upsampling.generator import Generator
 from Upsampling.discriminator import Discriminator
 from Common.visu_utils import plot_pcd_three_views,point_cloud_three_views

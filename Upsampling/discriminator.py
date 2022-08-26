@@ -4,7 +4,8 @@
 # @Author      : li rui hui
 # @Email       : ruihuili@gmail.com
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 from Common import ops
 
 class Discriminator(object):

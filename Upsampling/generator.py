@@ -3,7 +3,8 @@
 # @Description :
 # @Author      : li rui hui
 # @Email       : ruihuili@gmail.com
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 from Common import ops
 from tf_ops.sampling.tf_sampling import gather_point, farthest_point_sample
 class Generator(object):

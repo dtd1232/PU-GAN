@@ -5,7 +5,8 @@
 # @Email       : ruihuili@gmail.com
 # @File        : loss_utils.py
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 import os
 import sys
 sys.path.append(os.path.dirname(os.getcwd()))
