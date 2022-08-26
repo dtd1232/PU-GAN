@@ -1,4 +1,5 @@
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 from tensorflow.python.framework import ops
 import sys
 import os
@@ -59,8 +60,8 @@ def _group_point_grad(op, grad_out):
 # A shape is (N, P_A, C), B shape is (N, P_B, C)
 # D shape is (N, P_A, P_B)
 def batch_distance_matrix_general(A, B):
-    r_A = tf.reduce_sum(A * A, axis=2, keep_dims=True)
-    r_B = tf.reduce_sum(B * B, axis=2, keep_dims=True)
+    r_A = tf.reduce_sum(A * A, axis=2, keepdims=True)
+    r_B = tf.reduce_sum(B * B, axis=2, keepdims=True)
     m = tf.matmul(A, tf.transpose(B, perm=(0, 2, 1)))
     D = r_A - 2 * m + tf.transpose(r_B, perm=(0, 2, 1))
     return D
@@ -68,8 +69,8 @@ def batch_distance_matrix_general(A, B):
 # A shape is (N, P_A, C), B shape is (N, P_B, C)
 # D shape is (N, P_A, P_B)
 def batch_cross_matrix_general(A, B):
-    r_A = tf.reduce_sum(A * A, axis=2, keep_dims=True)
-    r_B = tf.reduce_sum(B * B, axis=2, keep_dims=True)
+    r_A = tf.reduce_sum(A * A, axis=2, keepdims=True)
+    r_B = tf.reduce_sum(B * B, axis=2, keepdims=True)
     m = tf.matmul(A, tf.transpose(B, perm=(0, 2, 1)))
     D = r_A - 2 * m + tf.transpose(r_B, perm=(0, 2, 1))
     return D
