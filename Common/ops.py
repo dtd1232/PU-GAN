@@ -37,32 +37,40 @@ sys.path.append(os.path.dirname(os.getcwd()))
 def mlp(features, layer_dims, bn=None, bn_params=None,name='mlp'):
     with tf.variable_scope(name, reuse=tf.AUTO_REUSE):
         for i, num_outputs in enumerate(layer_dims[:-1]):
-            features = tf.contrib.layers.fully_connected(
+            # features = tf.contrib.layers.fully_connected(
+            features = tf.compat.v1.layers.dense(
                 features, num_outputs,
-                normalizer_fn=bn,
-                normalizer_params=bn_params,
-                scope='fc_%d' % i)
-        outputs = tf.contrib.layers.fully_connected(
+                # normalizer_fn=bn,
+                # normalizer_params=bn_params,
+                # reuse='fc_%d' % i
+                )
+        # outputs = tf.contrib.layers.fully_connected(
+        outputs = tf.compat.v1.layers.dense(
             features, layer_dims[-1],
-            activation_fn=None,
-            scope='fc_%d' % (len(layer_dims) - 1))
+            # activation_fn=None,
+            # reuse='fc_%d' % (len(layer_dims) - 1)
+            )
         return outputs
 
 
 def mlp_conv(inputs, layer_dims, bn=None, bn_params=None,name='mlp_conv'):
     with tf.variable_scope(name, reuse=tf.AUTO_REUSE):
         for i, num_out_channel in enumerate(layer_dims[:-1]):
-            inputs = tf.contrib.layers.conv2d(
+            # inputs = tf.contrib.layers.conv2d(
+            inputs = tf.compat.v1.layers.conv2d(
                 inputs, num_out_channel,
                 kernel_size=1,
-                normalizer_fn=bn,
-                normalizer_params=bn_params,
-                scope='conv_%d' % i)
-        outputs = tf.contrib.layers.conv2d(
+                # normalizer_fn=bn,
+                # normalizer_params=bn_params,
+                # reuse='conv_%d' % i
+                )
+        # outputs = tf.contrib.layers.conv2d(
+        outputs = tf.compat.v1.layers.conv2d(
             inputs, layer_dims[-1],
             kernel_size=1,
-            activation_fn=None,
-            scope='conv_%d' % (len(layer_dims) - 1))
+            # activation_fn=None,
+            # reuse='conv_%d' % (len(layer_dims) - 1)
+            )
         return outputs
 ##################################################################################
 # Back projection Blocks
