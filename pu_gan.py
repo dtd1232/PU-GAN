@@ -10,7 +10,7 @@ pp = pprint.PrettyPrinter()
 
 def run():
     if FLAGS.phase=='train':
-        FLAGS.train_file = os.path.join(FLAGS.data_dir, 'train/PUGAN_poisson_256_poisson_1024.h5')
+        FLAGS.train_file = os.path.join(FLAGS.data_dir, 'ImageToStl.com_longdress_vox10_1051.h5')
         print('train_file:',FLAGS.train_file)
         if not FLAGS.restore:
             current_time = datetime.now().strftime("%Y%m%d-%H%M")
