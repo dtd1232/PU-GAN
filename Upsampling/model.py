@@ -257,13 +257,14 @@ class Model(object):
       saver = tf.train.Saver()
       restore_epoch, checkpoint_path = model_utils.pre_load_checkpoint(self.opts.log_dir)
       print(checkpoint_path)
+      checkpoint_path = "/home/klc/PU-GAN/model/model-100"
       saver.restore(self.sess, checkpoint_path)
 
       samples = glob(self.opts.test_data)
       point = pc_util.load(samples[0])
       self.opts.num_point = point.shape[0]
       out_point_num = int(self.opts.num_point*self.opts.up_ratio)
-
+    #   print("+++++++++++++++++++++++++++++++++",self.opts.num_point,"++++",self.opts.up_ratio)
       for point_path in samples:
           logging.info(point_path)
           start = time()
